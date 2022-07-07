@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TheLastSymphony
 {
-    public class TLS_PlayerManager : MonoBehaviour
+    public class TLS_PlayerController : MonoBehaviour
     {
         #region SerializedField
         [SerializeField] public TLS_Utility.PlayerVariation[] playerVariations;

@@ -30,7 +30,7 @@ namespace TheLastSymphony
         private new Rigidbody2D rigidbody2D;
 
         private TLS_AnimationController animationController;
-        private TLS_PlayerManager playerManager;
+        private TLS_PlayerController playerManager;
 
         private Vector2 tempVector;
 
@@ -45,7 +45,7 @@ namespace TheLastSymphony
             rigidbody2D = GetComponent<Rigidbody2D>();
 
             animationController = GetComponent<TLS_AnimationController>();
-            playerManager = GetComponent<TLS_PlayerManager>();
+            playerManager = GetComponent<TLS_PlayerController>();
 
             inputActions = new InputSystem();
             inputActions.Player.Enable();
