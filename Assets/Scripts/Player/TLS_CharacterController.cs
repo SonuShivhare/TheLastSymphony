@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace TheLastSymphony
 {
@@ -17,6 +18,11 @@ namespace TheLastSymphony
         [SerializeField] private float jumpForce;
 
         [SerializeField][Range(0, 0.5f)] private float groundDetectionRange;
+
+        [Space(15)]
+        [Header("PlayerCMCam")]
+        [SerializeField] private CinemachineVirtualCamera CMCam_Left;
+        [SerializeField] private CinemachineVirtualCamera CMCam_Right;
         #endregion
 
         #region Private Data
@@ -62,8 +68,19 @@ namespace TheLastSymphony
 
             HandleIdleAndRunAnimation(rigidbody2D.velocity.x);
 
-            if (rigidbody2D.velocity.x > 0 && !isFacingRight) Flip();
-            if (rigidbody2D.velocity.x < 0 && isFacingRight) Flip();
+            if (rigidbody2D.velocity.x > 0 && !isFacingRight)
+            {
+                CMCam_Right.Priority = 10;
+                CMCam_Left.Priority = 5;
+                Flip();
+            }
+
+            if (rigidbody2D.velocity.x < 0 && isFacingRight)
+            {
+                CMCam_Right.Priority = 5;
+                CMCam_Left.Priority = 10;
+                Flip();
+            }
         }
 
         private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -77,11 +94,6 @@ namespace TheLastSymphony
             StartCoroutine(JumpAnimationCheck());
         }
 
-        private bool IsGrounded()
-        {
-            return Physics2D.BoxCast(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size, 0, Vector2.down, groundDetectionRange, midGroundLayerMask);
-        }
-
         private IEnumerator JumpAnimationCheck()
         {
             yield return new WaitForSeconds(TLS_Constants.GroundCheckStartDelay);
@@ -92,6 +104,11 @@ namespace TheLastSymphony
 
             animationController.PlayAnimation(AnimationState.Idle);
             animationController.CanChangeAnimationState = true;
+        }
+
+        public bool IsGrounded()
+        {
+            return Physics2D.BoxCast(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size, 0, Vector2.down, groundDetectionRange, midGroundLayerMask);
         }
 
         private void HandleIdleAndRunAnimation(float magnitude)

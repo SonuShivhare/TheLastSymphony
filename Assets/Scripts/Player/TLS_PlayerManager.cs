@@ -8,6 +8,7 @@ namespace TheLastSymphony
     {
         #region SerializedField
         [SerializeField] public TLS_Utility.PlayerVariation[] playerVariations;
+
         #endregion
 
         #region Private Data
