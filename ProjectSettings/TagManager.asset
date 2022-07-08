@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -40,4 +41,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGroundBack
+    uniqueID: 2066024541
+    locked: 0
+  - name: BackGround
+    uniqueID: 1474061703
+    locked: 0
+  - name: BackGroundFront
+    uniqueID: 2947583555
+    locked: 0
+  - name: MidGroundBack
+    uniqueID: 2926760225
+    locked: 0
+  - name: MidGround
+    uniqueID: 941164519
+    locked: 0
+  - name: MidGroundFront
+    uniqueID: 1722464983
+    locked: 0
+  - name: ForeGroundBack
+    uniqueID: 2957024669
+    locked: 0
+  - name: ForeGround
+    uniqueID: 2765654199
+    locked: 0
+  - name: ForeGroundFront
+    uniqueID: 3671720989
     locked: 0
