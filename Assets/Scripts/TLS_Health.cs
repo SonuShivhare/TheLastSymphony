@@ -53,7 +53,7 @@ namespace TheLastSymphony
 
         private void Die()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Gameover");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
         }
 
     }

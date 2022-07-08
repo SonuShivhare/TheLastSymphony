@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public void LoadScene(int index)
     {
+        ResumeGame();
         SceneManager.LoadScene(index);
     }
 
