@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace TheLastSymphony
 {
-    public class TLS_PlayerManager : MonoBehaviour
+    public class TLS_PlayerController : MonoBehaviour
     {
         #region SerializedField
         [SerializeField] public TLS_Utility.PlayerVariation[] playerVariations;
+        [SerializeField] GameObject EnemyTrigger;
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace TheLastSymphony
 
             // ---------- Remove -----------
             playerType = PlayerType.Light;
-            
+
         }
 
         private void Start()
@@ -48,5 +49,31 @@ namespace TheLastSymphony
             animationController.CanChangeAnimationState = false;
         }
 
+        public LayerMask enemyLayer;
+        public float swordRange;
+
+        public void DetectEnemy()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, swordRange, enemyLayer);
+
+            Debug.DrawRay(transform.position, transform.right * swordRange, Color.red, 5f);
+            
+            if( hit && hit.transform.CompareTag("Enemy"))
+            {
+                hit.transform.GetComponent<TLS_SkeletonController>().PlayDeathAnimation();
+            }
+
+        }
+
+        //private void OnTriggerStay2D(Collider2D collision)
+        //{
+        //    if(detectEnemy)
+        //    {
+        //        if(collision.CompareTag("Enemy"))
+        //        {
+        //            Destroy(collision.gameObject);
+        //        }
+        //    }
+        //}
     }
 }
