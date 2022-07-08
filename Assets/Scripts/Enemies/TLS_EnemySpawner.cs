@@ -12,6 +12,11 @@ namespace TheLastSymphony
         [SerializeField] private float spawnDistanceFromPlayer;
 
         [SerializeField] private GameObject skeletonEnemy;
+
+        // Remove
+        public int count;
+        public float startingDelay;
+        public float delayBetween;
         #endregion
 
         #region Private Field
@@ -20,7 +25,7 @@ namespace TheLastSymphony
 
         private void Start()
         {
-            StartCoroutine(SpawnEnemyWaves(20, 1f, 2f));
+            StartCoroutine(SpawnEnemyWaves(count, startingDelay, delayBetween));
         }
 
         public IEnumerator SpawnEnemyWaves(int numberOfEnemy, float startingDelay, float delayBetween)
@@ -37,16 +42,16 @@ namespace TheLastSymphony
         private void SpawnEnemy()
         {
             spawnPos.x = (spawnPos.x = Random.Range(player.position.x - spawnRange, player.position.x + spawnRange)) < player.position.x ? spawnPos.x -= spawnDistanceFromPlayer : spawnPos.x + spawnDistanceFromPlayer;
-            spawnPos.y = player.position.y;
+            spawnPos.y = skeletonEnemy.transform.position.y;
 
             GameObject obj  = Instantiate(skeletonEnemy, spawnPos, Quaternion.identity);
             obj.GetComponent<TLS_SkeletonController>().AssignTarget(player);
         }
 
-        private void OnDrawGizmos()
-        {
-            Debug.DrawLine(new Vector2(player.position.x - spawnRange - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnRange + spawnDistanceFromPlayer, player.position.y), Color.red);
-            Debug.DrawLine(new Vector2(player.position.x - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnDistanceFromPlayer, player.position.y), Color.green);
-        }
+        //private void OnDrawGizmos()
+        //{
+        //    Debug.DrawLine(new Vector2(player.position.x - spawnRange - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnRange + spawnDistanceFromPlayer, player.position.y), Color.red);
+        //    Debug.DrawLine(new Vector2(player.position.x - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnDistanceFromPlayer, player.position.y), Color.green);
+        //}
     }
 }

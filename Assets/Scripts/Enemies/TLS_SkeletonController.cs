@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheLastSymphony;
 using UnityEngine;
 
 public class TLS_SkeletonController : MonoBehaviour
@@ -7,6 +8,8 @@ public class TLS_SkeletonController : MonoBehaviour
     #region SerializeField
     [SerializeField] private float minSpeed;
     [SerializeField] private float maxSpeed;
+
+    [SerializeField] private int damage;
     #endregion
 
     #region private Field
@@ -68,5 +71,24 @@ public class TLS_SkeletonController : MonoBehaviour
         transform.Rotate(0, 180, 0);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.GetComponent<TLS_Health>().Damage(damage);
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void PlayDeathAnimation()
+    {
+        GetComponent<Animator>().SetTrigger("Death");
+        GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    private void Die()
+    {
+        Destroy(this.gameObject);
+    }
 
 }
