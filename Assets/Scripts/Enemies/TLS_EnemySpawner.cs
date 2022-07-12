@@ -48,10 +48,10 @@ namespace TheLastSymphony
             obj.GetComponent<TLS_SkeletonController>().AssignTarget(player);
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Debug.DrawLine(new Vector2(player.position.x - spawnRange - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnRange + spawnDistanceFromPlayer, player.position.y), Color.red);
-        //    Debug.DrawLine(new Vector2(player.position.x - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnDistanceFromPlayer, player.position.y), Color.green);
-        //}
+        private void OnDrawGizmos()
+        {
+            Debug.DrawLine(new Vector2(player.position.x - spawnRange - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnRange + spawnDistanceFromPlayer, player.position.y), Color.red);
+            Debug.DrawLine(new Vector2(player.position.x - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnDistanceFromPlayer, player.position.y), Color.green);
+        }
     }
 }
