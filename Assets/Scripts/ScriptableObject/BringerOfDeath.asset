@@ -35,11 +35,8 @@ MonoBehaviour:
     delayBetween: 0
   bringerOfDeath:
     enemyType: 3
-    prefeb: {fileID: 1933283296603298336, guid: 177344bd112acc5439a8a96ed10f7fdc, type: 3}
-    minSpeed: 2
-    maxSpeed: 3
-    damage: 30
-    spawnRange: 0
-    spawnDistanceFromPlayer: 0
-    startingDelay: 0
-    delayBetween: 0
+    SpellGameObject: {fileID: 6150135661200205432, guid: 9d6f14f7564185442beb15326ea0d00b, type: 3}
+    playerSwordAttackDistance: 8
+    SwordAttackDealybetween: 5
+    SpellCastDelayMin: 1
+    SpellCastDelayMax: 3

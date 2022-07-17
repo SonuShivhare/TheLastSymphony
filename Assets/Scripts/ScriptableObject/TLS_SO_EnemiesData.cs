@@ -10,7 +10,7 @@ namespace TheLastSymphony
         public EnemyType enemyType;
         public TLS_Level_01_EnemyProperty skeleton;
         public TLS_Level_01_EnemyProperty hellHound;
-        public TLS_Level_01_EnemyProperty bringerOfDeath;
+        public TLS_BringerOfDeath bringerOfDeath;
 
         public void ResetData()
         {

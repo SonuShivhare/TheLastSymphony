@@ -20,5 +20,11 @@ namespace TheLastSymphony
             public bool bringerOfDeeath;
             public bool HellHound;
         }
+
+        public static IEnumerator AfterDelay(System.Action callBack, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            callBack?.Invoke();
+        }
     }
 }

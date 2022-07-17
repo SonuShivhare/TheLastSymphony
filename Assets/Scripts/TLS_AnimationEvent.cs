@@ -6,6 +6,7 @@ namespace TheLastSymphony
 {
     public class TLS_AnimationEvent : MonoBehaviour
     {
+        public bool accessPlayerCompo;
 
         private TLS_AnimationController animationController;
         private TLS_CharacterController characterController;
@@ -13,9 +14,12 @@ namespace TheLastSymphony
 
         private void Start()
         {
-            animationController = transform.parent.GetComponent<TLS_AnimationController>();
-            characterController = transform.parent.GetComponent<TLS_CharacterController>();
-            playerController = transform.parent.GetComponent<TLS_PlayerController>();
+            if(accessPlayerCompo)
+            {
+                animationController = transform.parent.GetComponent<TLS_AnimationController>();
+                characterController = transform.parent.GetComponent<TLS_CharacterController>();
+                playerController = transform.parent.GetComponent<TLS_PlayerController>();
+            }
         }
 
         public void CanChangeAnimationState()
@@ -35,6 +39,11 @@ namespace TheLastSymphony
         public void DetectEnemy()
         {
             playerController.DetectEnemy();
+        }
+
+        public void DestroyThis()
+        {
+            Destroy(this.gameObject);
         }
     }
 }

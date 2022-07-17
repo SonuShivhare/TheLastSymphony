@@ -115,3 +115,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c46b705a5c31844ebe4add1d7c3e47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  accessPlayerCompo: 1
