@@ -9,6 +9,7 @@ namespace TheLastSymphony
         #region SrializedField
         [SerializeField] private int maxHealth;
         [SerializeField] private int currentHealth;
+        [SerializeField] public TLS_GameManager gameManager;
         #endregion
 
         private TLS_AnimationController animationController;
@@ -26,6 +27,10 @@ namespace TheLastSymphony
 
         public void Damage(int damage)
         {
+            gameManager.particleEffect.playerBloodVFX.gameObject.SetActive(true);
+            gameManager.particleEffect.playerBloodVFX.transform.position = transform.position;
+            gameManager.particleEffect.playerBloodVFX.Play();
+
             currentHealth -= damage;
             if (currentHealth <= 0)
             {
