@@ -167,12 +167,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1010130892}
-  spawnRange: 10
-  spawnDistanceFromPlayer: 4
-  skeletonEnemy: {fileID: 6121974330659525221, guid: d4f25da37e8fda64591189bfe33a7dee, type: 3}
-  count: 20
-  startingDelay: 0
-  delayBetween: 3
+  enemiesData:
+  - {fileID: 11400000, guid: c1a1c212dd1d09741afeb0eeaafe3b71, type: 2}
+  - {fileID: 11400000, guid: da872541860aa0d49b53dc0d417bf7ba, type: 2}
+  diployEnemies:
+    skeleton: 0
+    bringerOfDeeath: 0
+    HellHound: 1
 --- !u!1 &196113712
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +952,7 @@ Transform:
   - {fileID: 579866688}
   - {fileID: 1731702489}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1519739225
 GameObject:
@@ -1237,7 +1238,7 @@ Transform:
   - {fileID: 41182861}
   - {fileID: 611581723}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &192876050397682050
 MonoBehaviour:

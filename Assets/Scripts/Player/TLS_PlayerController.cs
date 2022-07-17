@@ -58,9 +58,14 @@ namespace TheLastSymphony
 
             Debug.DrawRay(transform.position, transform.right * swordRange, Color.red, 5f);
             
-            if( hit && hit.transform.CompareTag("Enemy"))
+            if( hit && hit.transform.CompareTag("Skeleton"))
             {
-                hit.transform.GetComponent<TLS_SkeletonController>().PlayDeathAnimation();
+                hit.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
+            }
+
+            if(hit && hit.transform.CompareTag("HellHound"))
+            {
+                Destroy(hit.transform.gameObject);
             }
 
         }

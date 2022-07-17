@@ -91,12 +91,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 595997646545703999}
-  - component: {fileID: 8860720051777392409}
   - component: {fileID: 3510587572224672073}
   - component: {fileID: 2124064408245720527}
+  - component: {fileID: 1258855824050503794}
   m_Layer: 6
   m_Name: Skeleton
-  m_TagString: Enemy
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,21 +116,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8860720051777392409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6121974330659525221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 029b76031713281478710c36971ab4b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSpeed: 0.5
-  maxSpeed: 3
-  damage: 10
 --- !u!95 &3510587572224672073
 Animator:
   serializedVersion: 3
@@ -176,3 +161,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6728568, y: 1.7227925}
   m_EdgeRadius: 0
+--- !u!114 &1258855824050503794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6121974330659525221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f668c3d4c1bf994dbbf8a8bf5fca7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

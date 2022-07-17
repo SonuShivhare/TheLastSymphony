@@ -25,4 +25,11 @@ namespace TheLastSymphony
         Light,
         Heavy
     }
+    public enum EnemyType
+    {
+        None,
+        Skeleton,
+        HellHound,
+        BringerOfDeath
+    }
 }

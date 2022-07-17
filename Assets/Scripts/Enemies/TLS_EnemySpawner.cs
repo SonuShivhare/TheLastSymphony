@@ -8,50 +8,65 @@ namespace TheLastSymphony
     {
         #region SerializeField
         [SerializeField] private Transform player;
-        [SerializeField] private float spawnRange;
-        [SerializeField] private float spawnDistanceFromPlayer;
-
-        [SerializeField] private GameObject skeletonEnemy;
-
-        // Remove
-        public int count;
-        public float startingDelay;
-        public float delayBetween;
+        [SerializeField] private List<TLS_SO_EnemiesData> enemiesData;
+        [SerializeField] private TLS_Utility.DeployEnemies diployEnemies;
         #endregion
 
         #region Private Field
-        private Vector2 spawnPos;
+        private TLS_Level_01_EnemyProperty skeletonProperties;
+        private TLS_Level_01_EnemyProperty hellHoundProperties;
+
+        private List<Coroutine> coroutines;
         #endregion
 
         private void Start()
         {
-            StartCoroutine(SpawnEnemyWaves(count, startingDelay, delayBetween));
-        }
 
-        public IEnumerator SpawnEnemyWaves(int numberOfEnemy, float startingDelay, float delayBetween)
-        {
-            yield return new WaitForSeconds(startingDelay);
-
-            for (int i = 0; i < numberOfEnemy; i++)
+            if (diployEnemies.skeleton)
             {
-                SpawnEnemy();
-                yield return new WaitForSeconds(delayBetween);
+                skeletonProperties = enemiesData.Find(x => x.enemyType == EnemyType.Skeleton)?.skeleton;
+                StartCoroutine(SpawnLevel_01_EnemyWavesCoroutine(skeletonProperties, 20));
+            }
+
+            if (diployEnemies.HellHound)
+            {
+                hellHoundProperties = enemiesData.Find(x => x.enemyType == EnemyType.HellHound)?.hellHound;
+                StartCoroutine(SpawnLevel_01_EnemyWavesCoroutine(hellHoundProperties, 20));
             }
         }
 
-        private void SpawnEnemy()
+        public IEnumerator SpawnLevel_01_EnemyWavesCoroutine(TLS_Level_01_EnemyProperty enemiesProperties, int numOfEnemy)
         {
-            spawnPos.x = (spawnPos.x = Random.Range(player.position.x - spawnRange, player.position.x + spawnRange)) < player.position.x ? spawnPos.x -= spawnDistanceFromPlayer : spawnPos.x + spawnDistanceFromPlayer;
-            spawnPos.y = skeletonEnemy.transform.position.y;
+            yield return new WaitForSeconds(enemiesProperties.startingDelay);
 
-            GameObject obj  = Instantiate(skeletonEnemy, spawnPos, Quaternion.identity);
-            obj.GetComponent<TLS_SkeletonController>().AssignTarget(player);
+            for (int i = 0; i < numOfEnemy; i++)
+            {
+                SpawnLevel_01_Enemy(enemiesProperties);
+                yield return new WaitForSeconds(enemiesProperties.delayBetween);
+            }
         }
 
-        private void OnDrawGizmos()
+        private void SpawnLevel_01_Enemy(TLS_Level_01_EnemyProperty enemiesProperties)
         {
-            Debug.DrawLine(new Vector2(player.position.x - spawnRange - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnRange + spawnDistanceFromPlayer, player.position.y), Color.red);
-            Debug.DrawLine(new Vector2(player.position.x - spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + spawnDistanceFromPlayer, player.position.y), Color.green);
+            Vector2 spawnPos;
+            spawnPos.x = (spawnPos.x = Random.Range(player.position.x - enemiesProperties.spawnRange, player.position.x + enemiesProperties.spawnRange)) < player.position.x ? spawnPos.x -= enemiesProperties.spawnDistanceFromPlayer : spawnPos.x + enemiesProperties.spawnDistanceFromPlayer;
+            spawnPos.y = enemiesProperties.prefeb.transform.position.y;
+
+            float speed = Random.Range(enemiesProperties.minSpeed, enemiesProperties.maxSpeed);
+
+            GameObject obj = Instantiate(enemiesProperties.prefeb, spawnPos, Quaternion.identity);
+            obj.GetComponent<TLS_EnemyController>().Init(player, speed, enemiesProperties.damage);
+
+            if (enemiesProperties.enemyType == EnemyType.HellHound)
+            {
+                obj.GetComponent<TLS_EnemyController>().ChaseTheTarget();
+            }
         }
+
+        //private void OnDrawGizmos()
+        //{
+        //    Debug.DrawLine(new Vector2(player.position.x - skeletonProperties.spawnRange - skeletonProperties.spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + skeletonProperties.spawnRange + skeletonProperties.spawnDistanceFromPlayer, player.position.y), Color.red);
+        //    Debug.DrawLine(new Vector2(player.position.x - skeletonProperties.spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + skeletonProperties.spawnDistanceFromPlayer, player.position.y), Color.green);
+        //}
     }
 }

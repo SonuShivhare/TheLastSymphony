@@ -12,5 +12,13 @@ namespace TheLastSymphony
             public PlayerType playerVariationType;
             public GameObject playerVariationPrefeb;
         }
+
+        [System.Serializable]
+        public struct DeployEnemies
+        {
+            public bool skeleton;
+            public bool bringerOfDeeath;
+            public bool HellHound;
+        }
     }
 }
