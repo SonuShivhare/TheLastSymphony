@@ -18,6 +18,17 @@ namespace TheLastSymphony
         Recover,
         CastSpell
     }
+    public enum EnemyStates
+    {
+        None,
+        Idle,
+        Walk,
+        Attack,
+        Defense,
+        CastSpell,
+        Teleport,
+        Die
+    }
 
     public enum PlayerType
     {
