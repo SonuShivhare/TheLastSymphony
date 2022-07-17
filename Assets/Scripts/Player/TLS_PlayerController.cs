@@ -9,14 +9,12 @@ namespace TheLastSymphony
         #region SerializedField
         [SerializeField] public TLS_Utility.PlayerVariation[] playerVariations;
         [SerializeField] GameObject EnemyTrigger;
-
+        [SerializeField] private TLS_GameManager gameManager;
         #endregion
 
         #region Private Data
         private TLS_AnimationController animationController;
-
         private InputSystem inputSystem;
-
         private PlayerType playerType;
         #endregion
 
@@ -29,7 +27,8 @@ namespace TheLastSymphony
 
             inputSystem.Player.Enable();
 
-            inputSystem.Player.Attack.performed += Attack; ;
+            inputSystem.Player.Attack.performed += Attack;
+            inputSystem.Player.Attack.performed += PlaySwordWaveVFX;
 
             // ---------- Remove -----------
             playerType = PlayerType.Light;
@@ -43,6 +42,13 @@ namespace TheLastSymphony
             animationController.Init(obj.GetComponent<Animator>());
         }
 
+        private void PlaySwordWaveVFX(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            gameManager.particleEffect.swordWaveVFX.gameObject.SetActive(true);
+            gameManager.particleEffect.swordWaveVFX.transform.position = this.transform.position;
+            gameManager.particleEffect.swordWaveVFX.Play();
+        }
+         
         private void Attack(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
             animationController.PlayAnimation(AnimationState.Attack);
@@ -61,13 +67,16 @@ namespace TheLastSymphony
             if( hit && hit.transform.CompareTag("Skeleton"))
             {
                 hit.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
+
+                gameManager.particleEffect.fireDeathVFX.transform.position = hit.transform.GetComponent<TLS_EnemyController>().transform.GetChild(1).transform.position;
+                gameManager.particleEffect.fireDeathVFX.gameObject.SetActive(true);
+                gameManager.particleEffect.fireDeathVFX.Play();
             }
 
             if(hit && hit.transform.CompareTag("HellHound"))
             {
                 Destroy(hit.transform.gameObject);
             }
-
         }
 
         //private void OnTriggerStay2D(Collider2D collision)

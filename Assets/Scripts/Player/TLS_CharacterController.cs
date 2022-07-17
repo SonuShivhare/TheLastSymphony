@@ -37,7 +37,7 @@ namespace TheLastSymphony
 
         private Vector2 tempVector;
 
-        private bool isFacingRight;
+        [HideInInspector] public bool isFacingRight;
 
         #endregion
 
