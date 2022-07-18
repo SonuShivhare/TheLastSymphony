@@ -438,7 +438,7 @@ Transform:
   m_LocalScale: {x: 4.65312, y: 4.8074803, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &605815106
 GameObject:
@@ -450,7 +450,6 @@ GameObject:
   m_Component:
   - component: {fileID: 605815109}
   - component: {fileID: 605815108}
-  - component: {fileID: 605815107}
   - component: {fileID: 605815110}
   m_Layer: 0
   m_Name: Main Camera
@@ -459,14 +458,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &605815107
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605815106}
-  m_Enabled: 1
 --- !u!20 &605815108
 Camera:
   m_ObjectHideFlags: 0
@@ -522,7 +513,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &605815110
 MonoBehaviour:
@@ -936,13 +927,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4da5ba727cc34b19aeef87b306b9c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelIndex: 0
   audioSource: {fileID: 1423095127}
+  BGMAudioSource: {fileID: 0}
+  slash: {fileID: 0}
+  zombie: {fileID: 0}
+  death: {fileID: 0}
+  BGMs: []
   soundImage: {fileID: 1062224846}
-  onSprite: {fileID: 0}
-  offSprite: {fileID: 0}
   isSoundPlaying: 1
-  isBGMPlaying: 1
-  isVibrating: 1
 --- !u!82 &1423095127
 AudioSource:
   m_ObjectHideFlags: 0

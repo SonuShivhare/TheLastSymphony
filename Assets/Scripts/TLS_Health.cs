@@ -67,6 +67,7 @@ namespace TheLastSymphony
 
         private void Die()
         {
+            Destroy(this.gameObject);
             UnityEngine.SceneManagement.SceneManager.LoadScene("GameOverScene");
         }
 
