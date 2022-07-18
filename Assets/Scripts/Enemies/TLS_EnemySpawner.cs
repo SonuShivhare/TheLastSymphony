@@ -63,6 +63,24 @@ namespace TheLastSymphony
             }
         }
 
+        public void deployHellHound( )
+        {
+            StopDeploying();
+
+            if (diployEnemies.HellHound)
+            {
+                hellHoundProperties = enemiesData.Find(x => x.enemyType == EnemyType.HellHound)?.hellHound;
+                StartCoroutine(SpawnLevel_01_EnemyWavesCoroutine(hellHoundProperties, 20));
+            }
+        }
+
+        public void StopDeploying()
+        {
+            diployEnemies.skeleton = false;
+            diployEnemies.HellHound = false;
+            StopAllCoroutines();
+        }
+
         //private void OnDrawGizmos()
         //{
         //    Debug.DrawLine(new Vector2(player.position.x - skeletonProperties.spawnRange - skeletonProperties.spawnDistanceFromPlayer, player.position.y), new Vector2(player.position.x + skeletonProperties.spawnRange + skeletonProperties.spawnDistanceFromPlayer, player.position.y), Color.red);
