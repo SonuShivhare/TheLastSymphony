@@ -95,6 +95,7 @@ namespace TheLastSymphony
                 Debug.Log("TriggerWorked");
                 gameManager.levelManager.LoadNextScene();
                 gameManager.UIManager.portal.gameObject.SetActive(false);
+                gameManager.UIManager.portal.transform.parent.gameObject.SetActive(false);
             }
         }
 
