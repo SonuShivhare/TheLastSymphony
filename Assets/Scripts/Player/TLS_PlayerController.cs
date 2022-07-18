@@ -21,7 +21,6 @@ namespace TheLastSymphony
         public float nextAttacky;
         #endregion
 
-
         private void Awake()
         {
             animationController = GetComponent<TLS_AnimationController>();
@@ -75,6 +74,8 @@ namespace TheLastSymphony
             if (hit && hit.transform.CompareTag("Skeleton"))
             {
                 hit.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
+
+                gameManager.UIManager.SkullCounter();
 
                 gameManager.particleEffect.fireDeathVFX.transform.position = hit.transform.GetComponent<TLS_EnemyController>().transform.GetChild(1).transform.position;
                 gameManager.particleEffect.fireDeathVFX.gameObject.SetActive(true);
