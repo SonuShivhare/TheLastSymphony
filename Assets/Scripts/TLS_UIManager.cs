@@ -39,7 +39,7 @@ namespace TheLastSymphony
             if(!level01Completed)
             {
                 skullCount++;
-                skullCountText.text = skullCount.ToString() + " / " + totalSkullCount;
+                skullCountText.text = skullCount.ToString() + " / " + (skullCount > totalSkullCount ? totalSkullCount : skullCount);
 
                 if(skullCount >= totalSkullCount && !level01Completed)
                 {

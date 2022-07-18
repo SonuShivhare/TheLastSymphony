@@ -11,6 +11,12 @@ public class LevelManager : MonoBehaviour
             ResumeGame();
             SceneManager.LoadScene(index);
     }
+    public void LoadScene2(int index)
+    {
+            ResumeGame();
+            GameObject.Find("DDOL").GetComponent<DDOL>().DestroyObject();
+            SceneManager.LoadScene(index);
+    }
 
     public void LoadNextScene()
     {
@@ -24,7 +30,7 @@ public class LevelManager : MonoBehaviour
                 GameObject.Find("EnemySpawner").GetComponent<TLS_EnemySpawner>().StopDeploying();
         }
 
-        SceneManager.LoadScene(sceneLoaded + 1);
+        SceneManager.LoadScene(4);
     }
 
     public void QuitGame()
