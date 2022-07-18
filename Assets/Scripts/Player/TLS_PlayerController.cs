@@ -88,6 +88,16 @@ namespace TheLastSymphony
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Portal"))
+            {
+                Debug.Log("TriggerWorked");
+                gameManager.levelManager.LoadNextScene();
+                gameManager.UIManager.portal.gameObject.SetActive(false);
+            }
+        }
+
         //private void OnTriggerStay2D(Collider2D collision)
         //{
         //    if(detectEnemy)

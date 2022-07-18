@@ -49,6 +49,8 @@ namespace TheLastSymphony
             {
                 collision.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
 
+                TLS_GameManager.instance.UIManager.SkullCounter();
+
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.transform.position = collision.transform.GetComponent<TLS_EnemyController>().transform.GetChild(1).transform.position;
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.gameObject.SetActive(true);
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.Play();
