@@ -34,11 +34,10 @@ namespace TheLastSymphony
                 gameManager.particleEffect.playerBloodVFX.gameObject.SetActive(true);
                 gameManager.particleEffect.playerBloodVFX.transform.position = transform.position;
                 gameManager.particleEffect.playerBloodVFX.Play();
-                //gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
+                gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
             }
             else
             {
-
             }
 
             currentHealth -= damage;

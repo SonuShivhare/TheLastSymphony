@@ -23,24 +23,26 @@ namespace TheLastSymphony
 
         private void Awake()
         {
-            //levelIndex = SceneManager.GetActiveScene().buildIndex;
-            AssignBGM(levelIndex);
+            levelIndex = SceneManager.GetActiveScene().buildIndex;
+            if (levelIndex < 4)
+            {
+                AssignBGM(levelIndex);
 
-            if (isSoundPlaying)
-            {
-                audioSource.mute = false;
-                BGMAudioSource.mute = false;
-            }
-            else
-            {
-                audioSource.mute = true;
-                BGMAudioSource.mute = true;
+                if (isSoundPlaying)
+                {
+                    audioSource.mute = false;
+                    BGMAudioSource.mute = false;
+                }
+                else
+                {
+                    audioSource.mute = true;
+                    BGMAudioSource.mute = true;
+                }
             }
         }
 
         public void AssignBGM(int index)
         {
-            levelIndex++;
             BGMAudioSource.clip = null;
             BGMAudioSource.clip = BGMs[index];
             BGMAudioSource.Play();

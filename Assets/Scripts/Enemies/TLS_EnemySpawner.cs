@@ -67,11 +67,9 @@ namespace TheLastSymphony
         {
             StopDeploying();
 
-            if (diployEnemies.HellHound)
-            {
+            diployEnemies.HellHound = true;
                 hellHoundProperties = enemiesData.Find(x => x.enemyType == EnemyType.HellHound)?.hellHound;
                 StartCoroutine(SpawnLevel_01_EnemyWavesCoroutine(hellHoundProperties, 20));
-            }
         }
 
         public void StopDeploying()

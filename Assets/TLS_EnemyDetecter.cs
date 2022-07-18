@@ -58,11 +58,21 @@ namespace TheLastSymphony
 
             if (collision.CompareTag("HellHound"))
             {
+                TLS_GameManager.instance.UIManager.SkullCounter();
+
                 Destroy(collision.transform.gameObject);
+
+                TLS_GameManager.instance.particleEffect.soulFireDeath.transform.position = collision.transform.GetComponent<TLS_EnemyController>().transform.position;
+                TLS_GameManager.instance.particleEffect.soulFireDeath.gameObject.SetActive(true);
+                TLS_GameManager.instance.particleEffect.soulFireDeath.Play();
             }
             if (collision.CompareTag("BringerOfDeath"))
             {
                 collision.transform.GetComponent<TLS_Health>().Damage(20);
+
+                TLS_GameManager.instance.particleEffect.soulFireDeath.transform.position = collision.transform.position;
+                TLS_GameManager.instance.particleEffect.soulFireDeath.gameObject.SetActive(true);
+                TLS_GameManager.instance.particleEffect.soulFireDeath.Play();
             }
         }
     }

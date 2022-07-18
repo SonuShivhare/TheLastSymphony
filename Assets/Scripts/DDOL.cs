@@ -13,4 +13,12 @@ public class DDOL : MonoBehaviour
             DontDestroyOnLoad(item);    
         }
     }
+
+    public void DestroyObject()
+    {
+        foreach (var item in DDOLObjs)
+        {
+            Destroy(item.gameObject);
+        }
+    }
 }

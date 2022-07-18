@@ -42,7 +42,7 @@ namespace TheLastSymphony
             if(skullCount >= totalSkullCount && !level01Completed)
             {
                 level01Completed = true;
-                Invoke(nameof(ActivatePortal),1);
+                Invoke(nameof(ActivatePortal),0);
             }
         }
 
@@ -51,8 +51,9 @@ namespace TheLastSymphony
             portal.gameObject.SetActive(true);
             portal.transform.parent.gameObject.SetActive(true);
             //portal.transform.position = gameManager.characterController.gameObject.transform.position + new Vector3(3, 0, 0);
-            portal.transform.parent.transform.position = gameManager.characterController.gameObject.transform.position + new Vector3(3, 0, 0);
+            portal.transform.parent.transform.position = gameManager.characterController.gameObject.transform.position + new Vector3(5, 0, 0);
             portal.Play();
+            level01Completed = false;
         }
 
         public void ActivateMessagePopUp(GameObject obj)
