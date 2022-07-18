@@ -21,12 +21,11 @@ namespace TheLastSymphony
         //public Image musicImage;
         //public Image vibrationImage;
 
-        public Sprite onSprite;
-        public Sprite offSprite;
+        //public Sprite onSprite;
 
         public bool isSoundPlaying = true;
-        public bool isBGMPlaying = true;
-        public bool isVibrating = true;
+        //public bool isBGMPlaying = true;
+        //public bool isVibrating = true;
 
         //private void Awake()
         //{
@@ -84,12 +83,12 @@ namespace TheLastSymphony
             if (isSoundPlaying)
             {
                 audioSource.mute = false;
-                soundImage.sprite = onSprite;
+                //soundImage.sprite = onSprite;
             }
             else
             {
                 audioSource.mute = true;
-                soundImage.sprite = offSprite;
+                //soundImage.sprite = offSprite;
             }
         }
 

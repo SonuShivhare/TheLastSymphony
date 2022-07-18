@@ -18,7 +18,7 @@ namespace TheLastSymphony
         private InputSystem inputSystem;
         private PlayerType playerType;
 
-        public float nextAttacky;
+        private float nextAttacky;
         #endregion
 
         private void Awake()
