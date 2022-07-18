@@ -29,6 +29,8 @@ namespace TheLastSymphony
 
         public void Damage(int damage)
         {
+            currentHealth -= damage;
+
             if (isPlayer)
             {
                 gameManager.particleEffect.playerBloodVFX.gameObject.SetActive(true);
@@ -40,7 +42,6 @@ namespace TheLastSymphony
             {
             }
 
-            currentHealth -= damage;
             if (currentHealth <= 0)
             {
                 Die();

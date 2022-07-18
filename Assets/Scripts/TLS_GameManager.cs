@@ -12,6 +12,7 @@ namespace TheLastSymphony
         public TLS_ParticleEffects particleEffect;
         public TLS_CharacterController characterController;
         public TLS_UIManager UIManager;
+        public TLS_SoundManager soundManager;
 
         private void Awake()
         {

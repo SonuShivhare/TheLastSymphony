@@ -50,7 +50,7 @@ namespace TheLastSymphony
                 collision.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
 
                 TLS_GameManager.instance.UIManager.SkullCounter();
-
+                TLS_GameManager.instance.soundManager.PlaySwordSlashSound();
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.transform.position = collision.transform.GetComponent<TLS_EnemyController>().transform.GetChild(1).transform.position;
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.gameObject.SetActive(true);
                 TLS_GameManager.instance.particleEffect.fireDeathVFX.Play();
@@ -59,6 +59,8 @@ namespace TheLastSymphony
             if (collision.CompareTag("HellHound"))
             {
                 TLS_GameManager.instance.UIManager.SkullCounter();
+
+                TLS_GameManager.instance.soundManager.PlaySwordSlashSound();
 
                 Destroy(collision.transform.gameObject);
 
@@ -69,6 +71,8 @@ namespace TheLastSymphony
             if (collision.CompareTag("BringerOfDeath"))
             {
                 collision.transform.GetComponent<TLS_Health>().Damage(20);
+
+                TLS_GameManager.instance.soundManager.PlaySwordSlashSound();
 
                 TLS_GameManager.instance.particleEffect.soulFireDeath.transform.position = collision.transform.position;
                 TLS_GameManager.instance.particleEffect.soulFireDeath.gameObject.SetActive(true);
