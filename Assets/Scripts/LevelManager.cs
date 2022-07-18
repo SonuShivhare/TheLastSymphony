@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     public void LoadNextScene()
     {
         int sceneLoaded = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(sceneLoaded + 1);
+        SceneManager.LoadScene(sceneLoaded + 2);
     }
 
     public void QuitGame()
