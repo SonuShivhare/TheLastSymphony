@@ -9,7 +9,8 @@ namespace TheLastSymphony
         #region SrializedField
         [SerializeField] private int maxHealth;
         [SerializeField] private int currentHealth;
-        [SerializeField] public TLS_GameManager gameManager;
+        [SerializeField] private bool isPlayer;
+        [SerializeField] private TLS_GameManager gameManager;
         #endregion
 
         private TLS_AnimationController animationController;
@@ -23,13 +24,22 @@ namespace TheLastSymphony
         {
             yield return new WaitForEndOfFrame();
             animationController = GetComponent<TLS_AnimationController>();
+            gameManager = TLS_GameManager.instance;
         }
 
         public void Damage(int damage)
         {
-            gameManager.particleEffect.playerBloodVFX.gameObject.SetActive(true);
-            gameManager.particleEffect.playerBloodVFX.transform.position = transform.position;
-            gameManager.particleEffect.playerBloodVFX.Play();
+            if (isPlayer)
+            {
+                gameManager.particleEffect.playerBloodVFX.gameObject.SetActive(true);
+                gameManager.particleEffect.playerBloodVFX.transform.position = transform.position;
+                gameManager.particleEffect.playerBloodVFX.Play();
+                //gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
+            }
+            else
+            {
+
+            }
 
             currentHealth -= damage;
             if (currentHealth <= 0)
@@ -44,8 +54,6 @@ namespace TheLastSymphony
                     animationController.CanChangeAnimationState = false;
                 }
             }
-
-            //gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
         }
 
         public void Heal(int healAmount)

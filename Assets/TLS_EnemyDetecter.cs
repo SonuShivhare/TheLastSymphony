@@ -60,6 +60,10 @@ namespace TheLastSymphony
             {
                 Destroy(collision.transform.gameObject);
             }
+            if (collision.CompareTag("BringerOfDeath"))
+            {
+                collision.transform.GetComponent<TLS_Health>().Damage(20);
+            }
         }
     }
 }

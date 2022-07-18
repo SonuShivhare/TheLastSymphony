@@ -24,9 +24,9 @@ namespace TheLastSymphony
             isCastingSpell = false;
         }
 
-        public void Init(Transform player)
+        public void Start()
         {
-            this.player = player;
+            this.player = GameObject.Find("Player").transform;
         }
 
         private void Update()
