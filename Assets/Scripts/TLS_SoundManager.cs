@@ -1,73 +1,72 @@
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TheLastSymphony
 {
     public class TLS_SoundManager : MonoBehaviour
     {
+        public int levelIndex;
+
         [SerializeField] private AudioSource audioSource;
-        //[SerializeField] private AudioSource BGMAudioSource;
+        [SerializeField] private AudioSource BGMAudioSource;
 
-        //public AudioClip playerWalk;
-        //public AudioClip playerDamage;
-        //public AudioClip playerDie;
+        public AudioClip slash;
+        public AudioClip zombie;
+        public AudioClip death;
 
-        //public AudioClip enemy;
-        //public AudioClip enemyDie;
-
-        //public AudioClip swordHit;
+        public AudioClip[] BGMs;
 
         public Image soundImage;
-        //public Image musicImage;
-        //public Image vibrationImage;
-
-        //public Sprite onSprite;
 
         public bool isSoundPlaying = true;
-        //public bool isBGMPlaying = true;
-        //public bool isVibrating = true;
 
-        //private void Awake()
-        //{
-        //    //vibrationImage.GetComponent<Button>().interactable = SystemInfo.supportsVibration;
+        private void Awake()
+        {
+            //levelIndex = SceneManager.GetActiveScene().buildIndex;
+            AssignBGM(levelIndex);
 
-        //    if (isSoundPlaying)
-        //    {
-        //        audioSource.mute = false;
-        //        soundImage.sprite = onSprite;
-        //    }
-        //    else
-        //    {
-        //        audioSource.mute = true;
-        //        soundImage.sprite = offSprite;
-        //    }
+            if (isSoundPlaying)
+            {
+                audioSource.mute = false;
+                BGMAudioSource.mute = false;
+            }
+            else
+            {
+                audioSource.mute = true;
+                BGMAudioSource.mute = true;
+            }
+        }
 
-        //    if (isBGMPlaying)
-        //    {
-        //        //BGMAudioSource.Play();
-        //        musicImage.sprite = onSprite;
-        //    }
-        //    else
-        //    {
-        //        //BGMAudioSource.Stop();
-        //        musicImage.sprite = offSprite;
-        //    }
+        public void AssignBGM(int index)
+        {
+            levelIndex++;
+            BGMAudioSource.clip = null;
+            BGMAudioSource.clip = BGMs[index];
+            BGMAudioSource.Play();
+        }
 
-        //    if (isVibrating)
-        //    {
-        //        vibrationImage.sprite = onSprite;
-        //    }
-        //    else
-        //    {
-        //        vibrationImage.sprite = offSprite;
-        //    }
-        //}
-
-        public void PlaySwordHitSound()
+        public void PlaySwordSlashSound()
         {
             if (!audioSource.isPlaying)
             {
-                //audioSource.PlayOneShot(swordHit, 0.5f);
+                audioSource.PlayOneShot(slash, 0.5f);
+            }
+        }
+
+        public void PlayDeathSound()
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(death, 0.5f);
+            }
+        }
+
+        public void PlayZombieSound()
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(zombie, 0.5f);
             }
         }
 
@@ -83,30 +82,14 @@ namespace TheLastSymphony
             if (isSoundPlaying)
             {
                 audioSource.mute = false;
-                //soundImage.sprite = onSprite;
+                BGMAudioSource.mute = false;
             }
             else
             {
                 audioSource.mute = true;
-                //soundImage.sprite = offSprite;
+                BGMAudioSource.mute = true;
             }
         }
-
-        //public void SwitchMusicState()
-        //{
-        //    isBGMPlaying = !isBGMPlaying;
-
-        //    if (isBGMPlaying)
-        //    {
-        //        //BGMAudioSource.Play();
-        //        //musicImage.sprite = onSprite;
-        //    }
-        //    else
-        //    {
-        //        //BGMAudioSource.Stop();
-        //        //musicImage.sprite = offSprite;
-        //    }
-        //}
     }
 }
 
