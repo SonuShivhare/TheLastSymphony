@@ -18,7 +18,7 @@ namespace TheLastSymphony
         public GameObject levelStartMessagePopUp;
         public GameObject levelEndMessagePopUp;
 
-        int skullCount = 0;
+        public int skullCount = 0;
         public int totalSkullCount;
 
         public bool level01Completed = false;
@@ -36,18 +36,22 @@ namespace TheLastSymphony
 
         public void SkullCounter()
         {
-            skullCount++;
-            skullCountText.text = skullCount.ToString() + " / " + totalSkullCount;
-
-            if(skullCount >= totalSkullCount && !level01Completed)
+            if(!level01Completed)
             {
-                level01Completed = true;
-                Invoke(nameof(ActivatePortal),0);
+                skullCount++;
+                skullCountText.text = skullCount.ToString() + " / " + totalSkullCount;
+
+                if(skullCount >= totalSkullCount && !level01Completed)
+                {
+                    level01Completed = true;
+                    Invoke(nameof(ActivatePortal),0);
+                }
             }
         }
 
         private void ActivatePortal()
         {
+            GameObject.Find("EnemySpawner").GetComponent<TLS_EnemySpawner>().StopDeploying();
             portal.gameObject.SetActive(true);
             portal.transform.parent.gameObject.SetActive(true);
             //portal.transform.position = gameManager.characterController.gameObject.transform.position + new Vector3(3, 0, 0);

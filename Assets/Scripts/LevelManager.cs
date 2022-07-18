@@ -14,6 +14,9 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextScene()
     {
+        TLS_GameManager.instance.UIManager.skullCount = 0;
+        TLS_GameManager.instance.UIManager.skullCountText.text = TLS_GameManager.instance.UIManager.skullCount.ToString() + " / " + TLS_GameManager.instance.UIManager.totalSkullCount;
+
         int sceneLoaded = SceneManager.GetActiveScene().buildIndex;
 
         if(sceneLoaded > 1)
