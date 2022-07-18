@@ -8,8 +8,10 @@ namespace TheLastSymphony
     {
         public static TLS_GameManager instance;
 
+        public LevelManager levelManager;
         public TLS_ParticleEffects particleEffect;
         public TLS_CharacterController characterController;
+        public TLS_UIManager UIManager;
 
         private void Awake()
         {

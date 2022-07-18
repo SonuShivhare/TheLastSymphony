@@ -44,6 +44,8 @@ namespace TheLastSymphony
                     animationController.CanChangeAnimationState = false;
                 }
             }
+
+            gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
         }
 
         public void Heal(int healAmount)

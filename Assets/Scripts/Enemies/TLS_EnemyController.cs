@@ -21,6 +21,7 @@ namespace TheLastSymphony
             isChasingPlayer = false;
             isFacingRight = false;
         }
+
         public void Init(Transform target, float speed, int damage)
         {
             this.target = target;
