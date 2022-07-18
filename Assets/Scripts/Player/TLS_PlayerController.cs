@@ -18,7 +18,7 @@ namespace TheLastSymphony
         private InputSystem inputSystem;
         private PlayerType playerType;
 
-        public float nextAttacky;
+        private float nextAttacky;
         #endregion
 
         private void Awake()
@@ -85,6 +85,16 @@ namespace TheLastSymphony
             if (hit && hit.transform.CompareTag("HellHound"))
             {
                 Destroy(hit.transform.gameObject);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Portal"))
+            {
+                Debug.Log("TriggerWorked");
+                gameManager.levelManager.LoadNextScene();
+                gameManager.UIManager.portal.gameObject.SetActive(false);
             }
         }
 
