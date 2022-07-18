@@ -22,7 +22,9 @@ namespace TheLastSymphony
         [Space(15)]
         [Header("PlayerCMCam")]
         [SerializeField] private CinemachineVirtualCamera CMCam_Left;
+        [SerializeField] private CinemachineConfiner CMCam_Left_Confiner;
         [SerializeField] private CinemachineVirtualCamera CMCam_Right;
+        [SerializeField] private CinemachineConfiner CMCam_Right_Confiner;
         #endregion
 
         #region Private Data

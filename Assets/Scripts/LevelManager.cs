@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
                 GameObject.Find("EnemySpawner").GetComponent<TLS_EnemySpawner>().StopDeploying();
         }
 
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(sceneLoaded + 1);
     }
 
     public void QuitGame()
