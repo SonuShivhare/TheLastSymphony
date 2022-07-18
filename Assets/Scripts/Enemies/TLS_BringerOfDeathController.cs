@@ -12,7 +12,7 @@ namespace TheLastSymphony
         public Transform player;
         public EnemyStates enemyState;
         private Animator animator;
-        private Coroutine castSpell;
+        private bool isCastingSpell;
 
         private float nextAttack = 0;
 
@@ -21,6 +21,7 @@ namespace TheLastSymphony
             animator = GetComponent<Animator>();
             enemiesProperty = enemiesData.bringerOfDeath;
             enemyState = EnemyStates.Idle;
+            isCastingSpell = false;
         }
 
         public void Init(Transform player)
@@ -56,17 +57,24 @@ namespace TheLastSymphony
 
         private void DetectPlayer()
         {
-            if (Vector3.Distance(player.position, transform.position) < enemiesProperty.playerSwordAttackDistance && nextAttack < Time.time && enemyState == EnemyStates.Idle)
+            if (Vector3.Distance(player.position, transform.position) < enemiesProperty.playerSwordAttackDistance && isCastingSpell)
             {
+                isCastingSpell = false;
+                enemyState = EnemyStates.Attack;
+            }
+
+            if (Vector3.Distance(player.position, transform.position) < enemiesProperty.playerSwordAttackDistance && nextAttack < Time.time && !isCastingSpell)
+            {
+
                 enemyState = EnemyStates.Attack;
                 nextAttack = Time.time + enemiesProperty.SwordAttackDealybetween;
                 SwordAttack();
             }
-            else if(Vector3.Distance(player.position, transform.position) > enemiesProperty.playerSwordAttackDistance && enemyState != EnemyStates.CastSpell && enemyState == EnemyStates.Idle)
+            else if (Vector3.Distance(player.position, transform.position) > enemiesProperty.playerSwordAttackDistance && enemyState == EnemyStates.Idle &&!isCastingSpell)
             {
                 enemyState = EnemyStates.CastSpell;
-                float delay = Random.Range(enemiesProperty.SpellCastDelayMin, enemiesProperty.SpellCastDelayMax);
-                castSpell = StartCoroutine(CastSpell(delay));
+                isCastingSpell = true;
+                StartCoroutine(CastSpell());
             }
         }
 
@@ -74,20 +82,25 @@ namespace TheLastSymphony
         {
             animator.Play("Attack");
 
-            StartCoroutine(TLS_Utility.AfterDelay(() => { enemyState = EnemyStates.Idle; }, 1.5f));
+            StartCoroutine(TLS_Utility.AfterDelay(() => { enemyState = EnemyStates.Idle; }, 1));
         }
 
-        public IEnumerator CastSpell(float delay)
+        public IEnumerator CastSpell()
         {
-            yield return new WaitForSeconds(delay);
-            animator.Play("CastSpell");
-            Vector3 position = player.position;
-            
-            StartCoroutine(TLS_Utility.AfterDelay(() => {
+            while (isCastingSpell)
+            {
+                float delay = Random.Range(enemiesProperty.SpellCastDelayMin, enemiesProperty.SpellCastDelayMax);
+                yield return new WaitForSeconds(delay);
                 nextAttack = Time.time + enemiesProperty.SwordAttackDealybetween;
-                enemyState = EnemyStates.Idle;
+                animator.Play("CastSpell");
+                Vector3 position = player.position;
+
+                yield return new WaitForSeconds(1f);
+
                 Instantiate(enemiesProperty.SpellGameObject, position, Quaternion.identity);
-            }, 1.5f));
+
+                yield return new WaitForSeconds(1f);
+            }
         }
 
         public void OnTriggerStay(Collider other)

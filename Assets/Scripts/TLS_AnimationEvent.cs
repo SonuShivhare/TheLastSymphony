@@ -8,9 +8,13 @@ namespace TheLastSymphony
     {
         public bool accessPlayerCompo;
 
+        [SerializeField] private GameObject targetObject;
+
         private TLS_AnimationController animationController;
         private TLS_CharacterController characterController;
         private TLS_PlayerController playerController;
+
+
 
         private void Start()
         {
@@ -38,12 +42,21 @@ namespace TheLastSymphony
 
         public void DetectEnemy()
         {
-            //playerController.DetectEnemy();
+            playerController.DetectEnemy();
         }
 
         public void DestroyThis()
         {
             Destroy(this.gameObject);
+        }
+
+        public void ActivateTargetObject()
+        {
+            targetObject.SetActive(true);
+        }
+        public void DeactivateTargetObject()
+        {
+            targetObject.SetActive(false);
         }
     }
 }

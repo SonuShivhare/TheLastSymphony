@@ -45,7 +45,7 @@ namespace TheLastSymphony
                 }
             }
 
-            gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
+            //gameManager.UIManager.ModifyPlayerHealth(currentHealth, maxHealth);
         }
 
         public void Heal(int healAmount)
