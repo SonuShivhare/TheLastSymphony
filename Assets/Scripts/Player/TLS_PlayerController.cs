@@ -8,14 +8,17 @@ namespace TheLastSymphony
     {
         #region SerializedField
         [SerializeField] public TLS_Utility.PlayerVariation[] playerVariations;
-        [SerializeField] GameObject EnemyTrigger;
+        [SerializeField] GameObject EnemyDetector;
         [SerializeField] private TLS_GameManager gameManager;
+        [SerializeField] private float attackDelay;
         #endregion
 
         #region Private Data
         private TLS_AnimationController animationController;
         private InputSystem inputSystem;
         private PlayerType playerType;
+
+        public float nextAttacky;
         #endregion
 
 
@@ -28,10 +31,10 @@ namespace TheLastSymphony
             inputSystem.Player.Enable();
 
             inputSystem.Player.Attack.performed += Attack;
-            inputSystem.Player.Attack.performed += PlaySwordWaveVFX;
 
             // ---------- Remove -----------
             playerType = PlayerType.Light;
+            nextAttacky = 0;
 
         }
 
@@ -42,17 +45,22 @@ namespace TheLastSymphony
             animationController.Init(obj.GetComponent<Animator>());
         }
 
-        private void PlaySwordWaveVFX(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-        {
-            gameManager.particleEffect.swordWaveVFX.gameObject.SetActive(true);
-            gameManager.particleEffect.swordWaveVFX.transform.position = this.transform.position;
-            gameManager.particleEffect.swordWaveVFX.Play();
-        }
-         
         private void Attack(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
+            if (Time.time < nextAttacky) return;
+            nextAttacky = Time.time + attackDelay;
             animationController.PlayAnimation(AnimationState.Attack);
             animationController.CanChangeAnimationState = false;
+            PlaySwordWaveVFX();
+        }
+
+        private void PlaySwordWaveVFX()
+        {
+            gameManager.particleEffect.swordWaveVFX.gameObject.SetActive(true);
+            gameManager.particleEffect.swordWaveVFX.transform.SetPositionAndRotation(this.transform.position, (transform.rotation.y < 0 ? Quaternion.Euler(0, 0, 90) : Quaternion.Euler(0, 0, -90)));
+            gameManager.particleEffect.swordWaveVFX.Play();
+            GameObject tempObj = Instantiate(EnemyDetector, transform.position, Quaternion.identity);
+            tempObj.GetComponent<TLS_EnemyDetecter>().Init(transform.rotation.y < 0 ? -1 : 1, this.transform);
         }
 
         public LayerMask enemyLayer;
@@ -63,8 +71,8 @@ namespace TheLastSymphony
             RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, swordRange, enemyLayer);
 
             Debug.DrawRay(transform.position, transform.right * swordRange, Color.red, 5f);
-            
-            if( hit && hit.transform.CompareTag("Skeleton"))
+
+            if (hit && hit.transform.CompareTag("Skeleton"))
             {
                 hit.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
 
@@ -73,7 +81,7 @@ namespace TheLastSymphony
                 gameManager.particleEffect.fireDeathVFX.Play();
             }
 
-            if(hit && hit.transform.CompareTag("HellHound"))
+            if (hit && hit.transform.CompareTag("HellHound"))
             {
                 Destroy(hit.transform.gameObject);
             }

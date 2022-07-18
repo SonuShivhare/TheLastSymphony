@@ -15,6 +15,10 @@ namespace TheLastSymphony
         {
             if (instance == null)
             {
+                instance = this;
+            }
+            else
+            {
                 Destroy(this);
             }
         }

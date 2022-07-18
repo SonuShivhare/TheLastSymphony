@@ -38,7 +38,7 @@ namespace TheLastSymphony
 
         public void DetectEnemy()
         {
-            playerController.DetectEnemy();
+            //playerController.DetectEnemy();
         }
 
         public void DestroyThis()
