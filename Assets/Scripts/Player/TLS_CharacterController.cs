@@ -19,9 +19,6 @@ namespace TheLastSymphony
 
         [SerializeField][Range(0, 0.5f)] private float groundDetectionRange;
 
-        public bool switchCamera = true;
-        public Transform targetEnemy;
-
         [Space(15)]
         [Header("PlayerCMCam")]
         [SerializeField] private CinemachineVirtualCamera CMCam_Left;
@@ -73,16 +70,8 @@ namespace TheLastSymphony
 
             if (rigidbody2D.velocity.x > 0 && !isFacingRight)
             {
-                if(switchCamera)
-                {
-                    CMCam_Right.Priority = 10;
-                    CMCam_Left.Priority = 5;
-                }
-                else if(targetEnemy.position.x > transform.position.x)
-                {
-                    CMCam_Right.Priority = 10;
-                    CMCam_Left.Priority = 5;
-                }
+                CMCam_Right.Priority = 10;
+                CMCam_Left.Priority = 5;
                 Flip();
             }
 
@@ -90,16 +79,6 @@ namespace TheLastSymphony
             {
                 CMCam_Right.Priority = 5;
                 CMCam_Left.Priority = 10;
-                if (switchCamera)
-                {
-                    CMCam_Right.Priority = 5;
-                    CMCam_Left.Priority = 10;
-                }
-                else if (targetEnemy.position.x < transform.position.x)
-                {
-                    CMCam_Right.Priority = 5;
-                    CMCam_Left.Priority = 10;
-                }
                 Flip();
             }
         }
