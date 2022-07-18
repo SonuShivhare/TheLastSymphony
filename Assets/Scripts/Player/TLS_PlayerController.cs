@@ -55,9 +55,12 @@ namespace TheLastSymphony
 
         private void PlaySwordWaveVFX()
         {
+            if(gameManager != null)
+            {
             gameManager.particleEffect.swordWaveVFX.gameObject.SetActive(true);
             gameManager.particleEffect.swordWaveVFX.transform.SetPositionAndRotation(this.transform.position, (transform.rotation.y < 0 ? Quaternion.Euler(0, 0, 90) : Quaternion.Euler(0, 0, -90)));
             gameManager.particleEffect.swordWaveVFX.Play();
+            }
             GameObject tempObj = Instantiate(EnemyDetector, transform.position, Quaternion.identity);
             tempObj.GetComponent<TLS_EnemyDetecter>().Init(transform.rotation.y < 0 ? -1 : 1, this.transform);
         }

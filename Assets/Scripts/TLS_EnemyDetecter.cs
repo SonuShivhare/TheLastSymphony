@@ -44,7 +44,6 @@ namespace TheLastSymphony
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.LogWarning(collision.name);
             if (collision.CompareTag("Skeleton"))
             {
                 collision.transform.GetComponent<TLS_EnemyController>().PlayDeathAnimation();
